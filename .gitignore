@@ -1,0 +1,17 @@
+
+# created by `npm run build`
+dist
+
+# Coverage reports
+coverage
+
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+node_modules
+
+built
+
+# OSX
+.DS_Store
+.AppleDouble
+.LSOverride

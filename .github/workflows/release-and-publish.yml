@@ -1,0 +1,73 @@
+name: release-and-publish
+on:
+  push:
+    tags:
+      # patterns to match for tag creation. Here all tags similar to v1.0 or
+      # v1.2.0 will trigger this action
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
+
+permissions:
+  contents: read
+
+jobs:
+  setup_variables:
+    permissions:
+      contents: none
+    runs-on: ubuntu-latest
+    outputs:
+      isLatest: ${{ steps.release_type.outputs.latest }}
+
+    steps:
+      - id: release_type
+        name: Identify release type
+        run: echo "::set-output name=latest::$LATEST"
+        env:
+          LATEST: ${{ contains(github.ref, '-rc') != true }}
+
+  create_release:
+    permissions:
+      contents: write
+    needs: [setup_variables]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        # https://github.com/marketplace/actions/checkout
+        uses: actions/checkout@v4
+
+      - name: Create release for tag
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          generateReleaseNotes: true
+          draft: false
+          prerelease: ${{ needs.setup_variables.outputs.isLatest != 'true' }}
+
+  publish_to_npm:
+    needs: [setup_variables, create_release]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4 # v4.4.0
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org/
+      - name: Run CI
+        run: npm ci
+      - name: Run build
+        run: npm run build
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Publish with latest tag
+        if: ${{ needs.setup_variables.outputs.isLatest == 'true' }}
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Publish with next tag
+        if: ${{ needs.setup_variables.outputs.isLatest != 'true' }}
+        run: npm publish --access public --tag next
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
