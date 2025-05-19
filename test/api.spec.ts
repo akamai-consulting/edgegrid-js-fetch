@@ -12,10 +12,10 @@ describe('Api', function () {
     let api: EdgeGrid;
     beforeEach(function () {
         api = new Api(new EdgercCredentials(
-            'clientToken',
+            'clientSecret',
             'base.com',
             'accessToken',
-            'clientSecret'
+            'clientToken'
             ));
     });
 

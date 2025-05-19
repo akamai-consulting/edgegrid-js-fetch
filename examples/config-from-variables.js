@@ -1,12 +1,11 @@
 import {EdgeGrid, EdgeGridCredentials}  from '@akamai-consulting/edgegrid-js-fetch';
 
-const access_token = 'akab-access-token-xxx-xxxxxxxxxxxxxxxx';
-const client_token = 'akab-client-token-xxx-xxxxxxxxxxxxxxxx';
 const client_secret = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=';
 const host = 'akaa-baseurl-xxxxxxxxxxx-xxxxxxxxxxxxx.luna.akamaiapis.net';
+const access_token = 'akab-access-token-xxx-xxxxxxxxxxxxxxxx';
+const client_token = 'akab-client-token-xxx-xxxxxxxxxxxxxxxx';
 
-
-const credentials = new EdgeGridCredentials(client_token, host, access_token, client_secret);
+const credentials = new EdgeGridCredentials(client_secret, host, access_token, client_token);
 
 // Create EdgeGrid object from config
 const eg = new EdgeGrid(credentials);

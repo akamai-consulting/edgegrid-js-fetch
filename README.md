@@ -41,13 +41,13 @@ You can obtain the authentication credentials through an API client. Requests to
     ```javascript
     import {EdgeGridCredentials, EdgeGrid}  from '@akamai-consulting/edgegrid-js-fetch';
 
-    const clientToken = "akab-c113ntt0k3n4qtari252bfxxbsl-yvsdj",
+    const clientSecret = "C113nt53KR3TN6N90yVuAgICxIRwsObLi0E67/N8eRN=",
           host = "akab-h05tnam3wl42son7nktnlnnx-kbob3i3v.luna.akamaiapis.net";
           accessToken = "akab-acc35t0k3nodujqunph3w7hzp7-gtm6ij",
-          clientSecret = "C113nt53KR3TN6N90yVuAgICxIRwsObLi0E67/N8eRN=",
+          clientToken = "akab-c113ntt0k3n4qtari252bfxxbsl-yvsdj",
         
 
-    const config = new EdgeGridCredentials(client_token, host, access_token, client_secret);
+    const config = new EdgeGridCredentials(client_secret, host, access_token, client_token);
     ```
 
 ## Use

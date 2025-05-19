@@ -155,28 +155,28 @@ describe('edgerc', function () {
     describe('when the edgerc constructor has missing credentials', function () {
         it('throws an error when missing clientToken', function () {
             expect(()=>new EdgeGridCredentials(
-                '',
+                'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=',
                 'akaa-baseurl-xxxxxxxxxxx-xxxxxxxxxxxxx.luna.akamaiapis.net',
                 'akab-access-token-xxx-xxxxxxxxxxxxxxxx',
-                'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx='
+                '',
             )).toThrow("Insufficient Akamai credentials: missing client_token");
         });
 
         it('throws an error when missing host', function () {
             expect(()=>new EdgeGridCredentials(
-                'akab-client-token-xxx-xxxxxxxxxxxxxxxx',
+                'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=',
                 '',
                 'akab-access-token-xxx-xxxxxxxxxxxxxxxx',
-                'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx='
+                'akab-client-token-xxx-xxxxxxxxxxxxxxxx'
             )).toThrow("Insufficient Akamai credentials: missing host");
         });
 
         it('throws an error when missing access token', function () {
             expect(()=>new EdgeGridCredentials(
-                'akab-client-token-xxx-xxxxxxxxxxxxxxxx',
+                'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=',
                 'akaa-baseurl-xxxxxxxxxxx-xxxxxxxxxxxxx.luna.akamaiapis.net',
                 '',
-                'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx='
+                'akab-client-token-xxx-xxxxxxxxxxxxxxxx'
             )).toThrow("Insufficient Akamai credentials: missing access_token");
         });
 
@@ -184,10 +184,10 @@ describe('edgerc', function () {
 
        
             expect(()=>new EdgeGridCredentials(
-                'akab-client-token-xxx-xxxxxxxxxxxxxxxx',
+                '',
                 'akaa-baseurl-xxxxxxxxxxx-xxxxxxxxxxxxx.luna.akamaiapis.net',
                 'akab-access-token-xxx-xxxxxxxxxxxxxxxx',
-                ''
+                'akab-client-token-xxx-xxxxxxxxxxxxxxxx'
             )).toThrow("Insufficient Akamai credentials: missing client_secret");
         });
     });

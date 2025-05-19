@@ -9,13 +9,13 @@ export default class EdgeGridCredentials {
     /**
      * Create an EdgeGridCredentials object.
      * 
-     * @param {string} client_token - The client token
+     * @param {string} client_secret - The client secret
      * @param {string} host - The host
      * @param {string} access_token - The access token
-     * @param {string} client_secret - The client secret
+     * @param {string} client_token - The client token
      * 
      */
-    constructor(client_token: string, host: string, access_token: string, client_secret: string) {
+    constructor(client_secret: string, host: string, access_token: string, client_token: string) {
         if (!client_token) {
             throw TypeError('Insufficient Akamai credentials: missing client_token')
         }
@@ -95,7 +95,7 @@ export default class EdgeGridCredentials {
             config.client_secret && config.client_token)) {
             let errorMessage = "";
             const tokens =
-                ['client_token', 'client_secret', 'access_token', 'host'];
+                ['client_secret', 'host', 'access_token', 'client_token'];
             tokens.forEach(function (token) {
                 if (!config[token]) {
                     errorMessage += "\nMissing: " + token;
@@ -104,7 +104,7 @@ export default class EdgeGridCredentials {
             throw TypeError(errorMessage)
         }
 
-        return new EdgeGridCredentials(config.client_token, config.host, config.access_token, config.client_secret);
+        return new EdgeGridCredentials(config.client_secret, config.host, config.access_token, config.client_token);
     }
 
     
