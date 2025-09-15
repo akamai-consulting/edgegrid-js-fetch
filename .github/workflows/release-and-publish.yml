@@ -7,6 +7,7 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+*'
 
 permissions:
+  id-token: write
   contents: read
 
 jobs:
@@ -59,15 +60,9 @@ jobs:
         run: npm ci
       - name: Run build
         run: npm run build
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: Publish with latest tag
         if: ${{ needs.setup_variables.outputs.isLatest == 'true' }}
         run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: Publish with next tag
         if: ${{ needs.setup_variables.outputs.isLatest != 'true' }}
         run: npm publish --access public --tag next
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
