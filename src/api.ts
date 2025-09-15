@@ -37,7 +37,7 @@ export default class EdgeGrid {
         let requestToSign;
         if (input instanceof Request) {
             const url = new URL(input.url)
-            //url.host = this.config.host;
+            url.host = this.config.host;
             requestToSign = new Request(url, input)
             requestToSign = new Request(requestToSign, init)
         }
