@@ -1,6 +1,6 @@
 {
   "name": "@akamai-consulting/edgegrid-js-fetch",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Signing and fetch library the Akamai OPEN EdgeGrid Authentication scheme in a JS environment that supports the fetch spec",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
